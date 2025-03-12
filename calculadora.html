@@ -19,3 +19,100 @@
 </div>
 </body>
 </html>
+
+CSS
+
+*{ /*Seletor universal*/
+    margin: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(21, 29, 51);
+    padding: 0;
+    font-size: 1.3em;
+    line-height: 1.5em;
+}
+
+.container{
+    max-width: 640px;
+    background-color: rgb(226, 222, 222);
+    margin: 5px auto;
+    border-radius: 10px;
+    height: 350px;
+    padding: 20px;
+}
+
+h1{
+    text-align: center;
+    color: rgb(3, 40, 49);
+}
+
+form input, form label, form button{
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    color: rgb(3, 40, 49);
+    border-radius: 5px;
+
+}
+
+form input{
+    font-size: 24px;
+    height: 50px;
+    padding: 0 20px;
+}
+
+form button {
+    border: none;
+    font-size: 18px;
+    height: 50px;
+    background-color: rgb(76, 91, 94);
+    color: rgb(230, 228, 228);
+}
+
+JS
+const formulario = document.querySelector("#formulario");  
+console.log(formulario);
+
+formulario.addEventListener('submit', function(e) {
+    e.preventDefault();
+   
+    const inputPeso = e.target.querySelector("#peso"); 
+    const peso = Number(inputPeso.value);
+
+    alert("O peso digitado foi: " + peso);
+
+    const inputAltura = e.target.querySelector("#altura"); 
+    const altura = Number(inputAltura.value);
+
+    alert("A altura digitada foi: " + altura);
+
+   
+    const altura = altura / 100; 
+
+    const imc = calcularIMC(peso, altura);  
+    const classficacao = tabelaIMC(imc);
+    
+    alert("classificacao");
+});
+// CALCULAR O IMC
+function calcularIMC(peso, altura) {
+    let imc = (peso / altura ** 2);
+    return imc.toFixed(2); 
+}
+
+// CLASSIFICAR O GRAU DE IMC
+function tabelaIMC(imc){
+   const classficacao = ['abaixo do peso', 'peso normal','sobrepeso','obesidade',
+    'obesidade grau 2', 'obesidade grau 3']
+
+   if(imc >= 39.9) return classficacao[5];
+   if(imc >= 34.9) return classficacao[4];
+   if(imc >= 29.9) return classficacao[3];
+   if(imc >= 24.9) return classficacao[2];
+   if(imc >= 18.5) return classficacao[1];
+   if(imc <= 18.5) return classficacao[0];
+   
+}
